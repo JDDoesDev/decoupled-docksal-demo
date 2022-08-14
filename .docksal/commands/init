@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+
+## Initialize project from scratch (full reset)
+##
+## Usage: fin init
+
+# Abort if anything fails
+set -e
+
+#-------------------------- Helper functions --------------------------------
+
+# Console colors
+red='\033[0;31m'
+green='\033[0;32m'
+green_bg='\033[1;97;42m'
+yellow='\033[1;33m'
+NC='\033[0m'
+
+echo-red () { echo -e "${red}$1${NC}"; }
+echo-green () { echo -e "${green}$1${NC}"; }
+echo-green-bg () { echo -e "${green_bg}$1${NC}"; }
+echo-yellow () { echo -e "${yellow}$1${NC}"; }
+
+# Create volume folders on host as current user so that they can be synced later
+init-folders () {
+  if [ ! -d ${PROJECT_ROOT}/vendor ]; then
+    mkdir ${PROJECT_ROOT}/vendor
+  fi
+  if [ ! -d ${PROJECT_ROOT}/web/modules/contrib ]; then
+    mkdir ${PROJECT_ROOT}/web/modules/contrib
+  fi
+  if [ ! -d ${PROJECT_ROOT}/gatsby/.cache ]; then
+    mkdir ${PROJECT_ROOT}/gatsby/.cache
+  fi
+  if [ ! -d ${PROJECT_ROOT}/gatsby/public ]; then
+    mkdir ${PROJECT_ROOT}/gatsby/public
+  fi
+  if [ ! -d ${PROJECT_ROOT}/gatsby/node_modules ]; then
+    mkdir ${PROJECT_ROOT}/gatsby/node_modules
+  fi
+}
+
+local-settings () {
+  if [ "$DOCKSAL_ENVIRONMENT" = "local" ]; then
+    if [ ! -f "$PROJECT_ROOT/web/sites/default/settings.local.php" ]; then
+      cp "$PROJECT_ROOT/web/sites/default/example.settings.local.php" "$PROJECT_ROOT/web/sites/default/settings.local.php"
+    fi
+    if [ ! -f "$PROJECT_ROOT/web/sites/development.services.yml" ]; then
+      cp "$PROJECT_ROOT/web/sites/default.development.services.yml" "$PROJECT_ROOT/web/sites/development.services.yml"
+    fi
+  fi
+
+}
+
+#-------------------------- Execution --------------------------------
+
+# Cleanup
+fin project rm -f
+
+echo -e "${green_bg} Step 1 ${NC}${green} Creating volume folders...${NC}"
+init-folders
+
+# Code
+echo -e "${green_bg} Step 2 ${NC}${green} Initializing codebase...${NC}"
+# Using "fin docker-compose run cli <command>" to run a one off command using the cli service config
+# This way, we can run cli commands BEFORE starting the whole stack (which may fail without dependencies installed first)
+fin docker-compose run --rm cli bash -lc /var/www/.docksal/commands/code-init
+fin docker-compose run --rm cli bash -lc /var/www/.docksal/commands/fe-code-init
+
+# Stack
+echo -e "${green_bg} Step 3 ${NC}${green} Initializing stack...${NC}"
+fin project start
+echo "Waiting 10s for MySQL to initialize...";
+sleep 10
+
+# Copy default local settings if files don't exist.
+echo -e "${green_bg} Step 4 ${NC}${green} Checking for local settings files...${NC}"
+local-settings
+
+# Copy default local settings if files don't exist.
+echo -e "${green_bg} Step 5 ${NC}${green} Syncing vendor and contrib folders to host...${NC}"
+fin refresh -f vendor -s container -r
+fin refresh -f modules -s container -r
+
+echo -e "${green_bg} Step 6 ${NC}${green} Setting up site...${NC}"
+if [[ "" != "${SECRET_TERMINUS_TOKEN}" ]]; then
+  fin pull db -y
+  fin pull-files
+else
+  echo "Installing new site from existing config. No content will exist on this site. To sync with an existing site on Pantheon, please get your Terminus token and add it to docksal-local.yml."
+  fin drush site-install demo_umami --yes
+fi
+
+fin drush cr
+
+
+
+# echo -e "${green_bg} Step 7 ${NC}${green} Installing Gatsby NPM modules...${NC}"
+# fin gatsby-build
+
+echo -e "${green_bg} DONE! ${NC} "
+echo -e "Open ${yellow}https://cms.${VIRTUAL_HOST}${NC} in your browser to verify the Drupal install."
+echo -e "Open ${yellow}https://build.${VIRTUAL_HOST}${NC} in your browser to verify the Gatsby static build."
+echo -e "Open ${yellow}https://preview.${VIRTUAL_HOST}${NC} in your browser to verify the Gatsby development server after running 'fin gatsby-dev'."
+echo -e "Open ${yellow}https://storybook.${VIRTUAL_HOST}${NC} in your browser to verify the Storybook development server after running 'fin storybook-start'."
+echo -e "Open the following URL in your browser to login as user/1."
+fin drush uli
+

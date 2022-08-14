@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+#: exec_target = cli
+
+## Clean Gatsby folders
+##
+## Usage: fin gatsby-clean
+
+# Abort if anything fails
+set -e
+
+cd ${PROJECT_ROOT}/gatsby
+
+# Contents of both .cache and public have to be dropped
+# Cannot use 'gatsby clean' here as it tries to drop the entry folder and we cannot do this since .cache is a mounted as a volume
+rm -rf .cache/*
+rm -rf public/*

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+#: exec_target = cli
+
+## Initialize codebase
+##
+## Usage: fin code-init
+
+# Abort if anything fails
+set -e
+
+cd "$PROJECT_ROOT"
+
+# Install dependencies
+#time composer install --no-dev --ignore-platform-reqs --no-interaction --prefer-dist
+time composer install --ignore-platform-reqs --no-suggest --no-interaction --prefer-dist

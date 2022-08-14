@@ -1,1 +1,45 @@
 version: "3.9"
+
+services:
+  cli:
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: cli
+    image: ${COMPOSE_PROJECT_NAME_SAFE}_cli
+    build: ${PROJECT_ROOT}/.docksal/services/cli
+    volumes:
+      - project_root:/var/www:rw,nocopy,cached
+    environment:
+      - DOCKSAL_ENV=true
+      - DRUSH_OPTIONS_URI=cms.${VIRTUAL_HOST}
+      - DRUPAL_URI=http://web/
+      - "COMPOSER_MEMORY_LIMIT=-1"
+      - CHOKIDAR_USEPOLLING=${CHOKIDAR_USEPOLLING:-0}
+  static:
+    hostname: static
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: apache
+    image: docksal/apache:2.4-2.4
+    volumes:
+      - project_root:/var/www:ro,nocopy,cached
+    labels:
+      - io.docksal.virtual-host=static.${VIRTUAL_HOST}
+    environment:
+      - APACHE_DOCUMENTROOT=/var/www/gatsby/public
+  preview:
+    hostname: preview
+    extends:
+      service: cli
+    image: ${COMPOSE_PROJECT_NAME_SAFE}_preview
+    labels:
+      - io.docksal.virtual-host=preview.${VIRTUAL_HOST}
+      - io.docksal.virtual-port=8000
+      - io.docksal.user=docker
+      - io.docksal.shell=bash
+    volumes:
+      # Keep write-heavy folders in a volumes (improves fs performance on non-Linux platforms)
+      - project_root:/var/www:rw,nocopy,cached  # Project root volume
+    working_dir: /var/www/gatsby
+    depends_on:
+      - cli # cli has to start first to avoid race conditions in startup scripts between cli, php and preview
