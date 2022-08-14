@@ -30,6 +30,8 @@ services:
   web:
     hostname: web
     image: docksal/nginx:1.21-1.2
+    volumes:
+      - project_root:/var/www:ro,nocopy,cached  # Project root volume (read-only)
     extends:
       file: ${HOME}/.docksal/stacks/services.yml
       service: nginx
