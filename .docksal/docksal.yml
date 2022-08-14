@@ -27,6 +27,14 @@ services:
       - io.docksal.virtual-host=static.${VIRTUAL_HOST}
     environment:
       - APACHE_DOCUMENTROOT=/var/www/gatsby/public
+  web:
+    hostname: web
+    image: docksal/nginx:1.21-1.2
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: nginx
+    labels:
+      - io.docksal.virtual-host=cms.${VIRTUAL_HOST}
   preview:
     hostname: preview
     extends:
