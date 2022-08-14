@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+#: exec_target = storybook
+
+cd /var/www/gatsby || exit
+export NODE_OPTIONS=--openssl-legacy-provider;
+./node_modules/.bin/start-storybook --host 0.0.0.0 -p 8001

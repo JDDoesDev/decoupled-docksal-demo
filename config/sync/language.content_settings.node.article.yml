@@ -1,0 +1,18 @@
+uuid: db80a2c2-4fb3-4560-8d72-0a80f1a06778
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.article
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+_core:
+  default_config_hash: 0wQkRfzyea2BPkoudJ9i45eN0okt2MKAs671vjDwWKI
+id: node.article
+target_entity_type_id: node
+target_bundle: article
+default_langcode: site_default
+language_alterable: true
