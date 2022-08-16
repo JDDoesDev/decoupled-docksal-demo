@@ -18,13 +18,14 @@ const config: GatsbyConfig = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
-    // {
-    //   resolve: `gatsby-source-drupal`,
-    //   options: {
-    //     baseUrl: process.env.GATSBY_DRUPAL_ENDPOINT,
-    //     apiBase: `jsonapi`,
-    //   }
-    // },
+    `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-source-drupal`,
+      options: {
+        baseUrl: process.env.GATSBY_DRUPAL_ENDPOINT,
+        apiBase: `jsonapi`,
+      }
+    },
     `gatsby-plugin-typescript`,
     {
       resolve: `gatsby-plugin-schema-snapshot`,
