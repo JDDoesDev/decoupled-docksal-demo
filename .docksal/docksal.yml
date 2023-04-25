@@ -7,12 +7,6 @@ services:
       service: cli
     image: ${COMPOSE_PROJECT_NAME_SAFE}_cli
     build: ${PROJECT_ROOT}/.docksal/services/cli
-    volumes:
-      - drupal_composer_packages:/var/www/vendor
-      - drupal_contrib_modules:/var/www/web/modules/contrib
-      - gatsby_node_modules:/var/www/gatsby/node_modules
-      - gatsby_build_cache:/var/www/gatsby/.cache
-      - project_root:/var/www:rw,nocopy,cached
     environment:
       - DOCKSAL_ENV=true
       - DRUSH_OPTIONS_URI=cms.${VIRTUAL_HOST}
@@ -55,14 +49,7 @@ services:
       # Keep write-heavy folders in a volumes (improves fs performance on non-Linux platforms)
       - docksal_ssh_agent:/.ssh-agent:ro  # Shared ssh-agent socket
       - ${SSH_AUTH_SOCK_DIR}:${SSH_AUTH_SOCK_DIR}:ro # Shared directory for SSH key forwarding support
-      - gatsby_node_modules:/var/www/gatsby/node_modules
-      - gatsby_build_cache:/var/www/gatsby/.cache # gatsby build and preview cannot share the same .cache folder
       - project_root:/var/www:rw,nocopy,cached  # Project root volume
     working_dir: /var/www/gatsby
     depends_on:
       - cli # cli has to start first to avoid race conditions in startup scripts between cli, php and preview
-volumes:
-  drupal_composer_packages:
-  drupal_contrib_modules:
-  gatsby_node_modules:
-  gatsby_build_cache:
