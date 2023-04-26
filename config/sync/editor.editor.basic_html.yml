@@ -1,4 +1,4 @@
-uuid: 8cc50078-8146-461f-94da-15247f67264e
+uuid: 5bfc88cc-588a-40b7-b398-0edbbc5cd086
 langcode: en
 status: true
 dependencies:
@@ -7,7 +7,7 @@ dependencies:
   module:
     - ckeditor
 _core:
-  default_config_hash: 5sXh8-bdkb6AYERDE9fIz0c1VnvpNU4g1DlX13MRAJw
+  default_config_hash: CFnxGp6aBUPNmTVQstlMemoxHb2kTjRWHLcvyR60MmU
 format: basic_html
 editor: ckeditor
 settings:
@@ -42,11 +42,7 @@ settings:
           name: Tools
           items:
             - Source
-  plugins:
-    language:
-      language_list: un
-    stylescombo:
-      styles: ''
+  plugins: {  }
 image_upload:
   status: false
   scheme: public
