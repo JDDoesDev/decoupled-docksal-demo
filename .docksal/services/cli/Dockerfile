@@ -1,4 +1,4 @@
-FROM docksal/cli:php8.0-3.2
+FROM docksal/cli:php8.1-3.2
 
 # Include headless chrome for BLT Behat testing.
 RUN apt-get update \

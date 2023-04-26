@@ -22,7 +22,7 @@ const config: GatsbyConfig = {
     {
       resolve: `gatsby-source-drupal`,
       options: {
-        baseUrl: process.env.GATSBY_DRUPAL_ENDPOINT,
+        baseUrl: `http://web/`,
         apiBase: `jsonapi`,
       }
     },
