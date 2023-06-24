@@ -1,8 +1,8 @@
 {
-  "name": "decoupled-days-demo",
+  "name": "drupalcamp-asheville-demo",
   "version": "1.0.0",
   "private": true,
-  "description": "decoupled-days-demo",
+  "description": "drupalcamp-asheville-demo",
   "author": "JD Flynn",
   "keywords": [
     "gatsby"
