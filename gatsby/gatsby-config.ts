@@ -7,7 +7,7 @@ dotenv.config({
 console.log(process.env.NODE_ENV)
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `Decoupled Days Demo`,
+    title: `Decoupled Example of Amazement`,
     siteUrl: `https://www.yourdomain.tld`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
@@ -18,6 +18,7 @@ const config: GatsbyConfig = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
+    "gatsby-transformer-sharp",
     // {
     //   resolve: `gatsby-source-drupal`,
     //   options: {
@@ -27,13 +28,20 @@ const config: GatsbyConfig = {
     // },
     `gatsby-plugin-typescript`,
     {
-      resolve: `gatsby-plugin-schema-snapshot`,
+      resolve: "gatsby-source-filesystem",
       options: {
-        path: `${__dirname}/src/schema.gql`,
+        name: "pages",
+        path: "./src/pages/",
       },
+      __key: "pages",
     },
+    // {
+    //   resolve: `gatsby-plugin-schema-snapshot`,
+    //   options: {
+    //     path: `${__dirname}/src/schema.gql`,
+    //   },
+    // },
   ],
-
-}
+};
 
 export default config

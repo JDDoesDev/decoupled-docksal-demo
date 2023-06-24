@@ -3,4 +3,4 @@
 #: exec_target = preview
 
 cd /var/www/gatsby || exit
-gatsby develop -H 0.0.0.0
+npx gatsby develop -H 0.0.0.0

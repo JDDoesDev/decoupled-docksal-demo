@@ -16,11 +16,11 @@ RUN set -e; \
     # Initialize the user environment (this loads nvm)
     source $HOME/.profile; \
     # Install the necessary nodejs version
-    nvm install 16.13.2; \
-    nvm alias default 16.13.2; \
+    nvm install 18.16.1; \
+    nvm alias default 18.16.1; \
     nvm use default; \
     # Install packages
-    npm install -g npm@8.3.1; \
+    npm install -g npm@9.7.2; \
     npm install -g gatsby-cli; \
     # Cleanup
     nvm clear-cache && npm cache clear --force; \

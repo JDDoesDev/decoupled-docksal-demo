@@ -39,6 +39,7 @@ services:
       - io.docksal.virtual-host=cms.${VIRTUAL_HOST}
   preview:
     hostname: preview
+    build: ${PROJECT_ROOT}/.docksal/services/cli
     extends:
       service: cli
     image: ${COMPOSE_PROJECT_NAME_SAFE}_preview
