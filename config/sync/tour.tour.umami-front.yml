@@ -1,4 +1,4 @@
-uuid: 4037aa9b-238a-4903-bc5f-999fa31e8256
+uuid: 9c2d87a6-c0aa-498d-86c8-336a39046e97
 langcode: en
 status: true
 dependencies:
@@ -18,13 +18,13 @@ tips:
     plugin: text
     label: 'Welcome to the Umami Drupal demo'
     weight: 1
-    body: 'Drupal is a powerful open source content management system and this demo, based on a fictional food magazine called Umami, will introduce you to some of Drupal''s concepts and features.'
+    body: "Drupal is a powerful open source content management system and this demo, based on a fictional food magazine called Umami, will introduce you to some of Drupal's concepts and features."
   out-of-the-box:
     id: out-of-the-box
     plugin: text
-    label: 'Drupal''s core capabilities'
+    label: "Drupal's core capabilities"
     weight: 2
-    body: 'Drupal provides many of the features you need to start building powerful websites right out-of-the-box. The features presented in this demo are based entirely on Drupal 8''s core functionality.'
+    body: "Drupal provides many of the features you need to start building powerful websites right out-of-the-box. The features presented in this demo are based entirely on Drupal 8's core functionality."
   navigation:
     id: navigation
     plugin: text
@@ -40,7 +40,7 @@ tips:
     weight: 4
     position: left
     selector: '.block-type-banner-block .summary'
-    body: 'This website uses the custom Umami theme to style its appearance. This theme has been created using CSS and by customizing Drupal''s HTML templates that are built using the popular Twig templating system. Themes are also available for download and installation.'
+    body: "This website uses the custom Umami theme to style its appearance. This theme has been created using CSS and by customizing Drupal's HTML templates that are built using the popular Twig templating system. Themes are also available for download and installation."
   managing-content:
     id: managing-content
     plugin: text

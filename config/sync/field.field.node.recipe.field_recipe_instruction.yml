@@ -1,4 +1,4 @@
-uuid: 53db7ad5-cc63-47aa-9b04-60134d7290df
+uuid: e39d6ed9-c2e4-4a7e-87aa-57d2cae26aa9
 langcode: en
 status: true
 dependencies:
@@ -8,7 +8,7 @@ dependencies:
   module:
     - text
 _core:
-  default_config_hash: gy8xsSbpLV0Hj2I8A2xbAuJMPnb3CsvU-iFklHfbaao
+  default_config_hash: Y3EgEjNWuHjttMDBArNrUx3sZG69c-LYKJgvqzX8h7w
 id: node.recipe.field_recipe_instruction
 field_name: field_recipe_instruction
 entity_type: node
@@ -19,5 +19,6 @@ required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats: {  }
 field_type: text_long

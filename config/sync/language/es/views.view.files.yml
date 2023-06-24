@@ -26,6 +26,8 @@ display:
           label: 'Fecha de modificación'
         count:
           label: 'Usado en'
+        operations:
+          label: Operaciones
       pager:
         options:
           tags:

@@ -1,4 +1,4 @@
-uuid: 40fd6966-55bf-46b3-b40f-ad26505f64f4
+uuid: 42cb0b4f-d985-43ab-aa86-63038e409454
 langcode: en
 status: true
 dependencies:
@@ -39,7 +39,7 @@ tips:
     label: 'Filter the search'
     weight: 4
     selector: '#edit-translation'
-    body: 'You can search for untranslated strings if you want to translate something that isn''t translated yet. If you want to modify an existing translation, you might want to search only for translated strings.'
+    body: "You can search for untranslated strings if you want to translate something that isn't translated yet. If you want to modify an existing translation, you might want to search only for translated strings."
   locale-submit:
     id: locale-submit
     plugin: text

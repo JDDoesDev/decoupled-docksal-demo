@@ -1,4 +1,4 @@
-uuid: 9acd1e6a-497a-492f-b421-c34037324ecc
+uuid: 36c605ba-d104-450a-ad20-89dda972b217
 langcode: en
 status: true
 dependencies:
@@ -7,7 +7,7 @@ dependencies:
   module:
     - ckeditor5
 _core:
-  default_config_hash: qtbIKnf_F-jhwZ-rl2ajm3BfFNPj8INYFVd2_5k6UFA
+  default_config_hash: QKDFLKPoIyZugE3PGIB9iiJDHHUmQNAThGAZC9fEGWI
 format: full_html
 editor: ckeditor5
 settings:
@@ -26,12 +26,11 @@ settings:
       - numberedList
       - '|'
       - blockQuote
-      - drupalInsertImage
+      - drupalMedia
       - insertTable
       - horizontalLine
       - '|'
       - heading
-      - codeBlock
       - '|'
       - sourceEditing
   plugins:
@@ -42,11 +41,6 @@ settings:
         - heading4
         - heading5
         - heading6
-    ckeditor5_imageResize:
-      allow_resize: true
-    ckeditor5_list:
-      reversed: true
-      startIndex: true
     ckeditor5_sourceEditing:
       allowed_tags: {  }
 image_upload:
@@ -55,5 +49,5 @@ image_upload:
   directory: inline-images
   max_size: ''
   max_dimensions:
-    width: 0
-    height: 0
+    width: null
+    height: null

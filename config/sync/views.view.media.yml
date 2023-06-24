@@ -1,4 +1,4 @@
-uuid: 42503496-5f83-4753-a4ec-ee050d5a006e
+uuid: 1839fbb6-f2c3-408e-92e5-659dd9687e18
 langcode: en
 status: true
 dependencies:
@@ -9,7 +9,7 @@ dependencies:
     - media
     - user
 _core:
-  default_config_hash: 6G9UOSxp92iKqLnoqURAY_QDVjMI9FrBdcD2gWyJROA
+  default_config_hash: 7d9f__iKDjy8x8-Cnbj1-DRZPOEWYTZ4DT6ETtjARiI
 id: media
 label: Media
 module: views
@@ -448,6 +448,15 @@ display:
             date_format: short
             custom_date_format: ''
             timezone: ''
+            tooltip:
+              date_format: long
+              custom_date_format: ''
+            time_diff:
+              enabled: false
+              future_format: '@interval hence'
+              past_format: '@interval ago'
+              granularity: 2
+              refresh: 60
           group_column: value
           group_columns: {  }
           group_rows: true

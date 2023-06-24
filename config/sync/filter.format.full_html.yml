@@ -1,10 +1,14 @@
+uuid: 507a6403-404a-414e-bbef-096054fd8452
 langcode: en
 status: true
 dependencies:
+  config:
+    - core.entity_view_mode.media.responsive_3x2
   module:
     - editor
+    - media
 _core:
-  default_config_hash: WNeK5FbcY8pXgEpbD_KgRzlF1-5PL3BJXwqaBctPTqw
+  default_config_hash: bIBAFGPKhiVXB2JK30BquxYB9-eYxuDSHF-fpHHN71s
 name: 'Full HTML'
 format: full_html
 weight: 2
@@ -27,6 +31,12 @@ filters:
     status: true
     weight: 10
     settings: {  }
+  filter_image_lazy_load:
+    id: filter_image_lazy_load
+    provider: filter
+    status: true
+    weight: 15
+    settings: {  }
   editor_file_reference:
     id: editor_file_reference
     provider: editor
@@ -39,6 +49,21 @@ filters:
     status: false
     weight: -10
     settings:
-      allowed_html: ''
+      allowed_html: '<a href hreflang> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <s> <sup> <sub> <table> <caption> <tbody> <thead> <tfoot> <th> <td> <tr> <hr> <p> <h1> <pre> <drupal-media data-entity-type data-entity-uuid data-view-mode data-align data-caption alt title>'
       filter_html_help: true
       filter_html_nofollow: false
+  media_embed:
+    id: media_embed
+    provider: media
+    status: true
+    weight: 100
+    settings:
+      default_view_mode: responsive_3x2
+      allowed_view_modes:
+        responsive_3x2: responsive_3x2
+      allowed_media_types:
+        audio: audio
+        document: document
+        image: image
+        remote_video: remote_video
+        video: video
