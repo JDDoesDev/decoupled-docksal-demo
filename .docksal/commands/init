@@ -60,12 +60,12 @@ fin project rm -f
 echo -e "${green_bg} Step 1 ${NC}${green} Creating volume folders...${NC}"
 init-folders
 
-# Code
-echo -e "${green_bg} Step 2 ${NC}${green} Initializing codebase...${NC}"
-# Using "fin docker-compose run cli <command>" to run a one off command using the cli service config
-# This way, we can run cli commands BEFORE starting the whole stack (which may fail without dependencies installed first)
-fin docker-compose run --rm cli bash -lc /var/www/.docksal/commands/code-init
-fin docker-compose run --rm cli bash -lc /var/www/.docksal/commands/fe-code-init
+# # Code
+# echo -e "${green_bg} Step 2 ${NC}${green} Initializing codebase...${NC}"
+# # Using "fin docker-compose run cli <command>" to run a one off command using the cli service config
+# # This way, we can run cli commands BEFORE starting the whole stack (which may fail without dependencies installed first)
+# fin docker-compose run --rm cli bash -lc /var/www/.docksal/commands/code-init
+# fin docker-compose run --rm cli bash -lc /var/www/.docksal/commands/fe-code-init
 
 # Stack
 echo -e "${green_bg} Step 3 ${NC}${green} Initializing stack...${NC}"
@@ -73,14 +73,20 @@ fin project start
 echo "Waiting 10s for MySQL to initialize...";
 sleep 10
 
+cd ${PROJECT_ROOT}/
+fin composer install --no-interaction
+
+cd ${PROJECT_ROOT}/gatsby
+fin exec npm i
+
 # Copy default local settings if files don't exist.
 echo -e "${green_bg} Step 4 ${NC}${green} Checking for local settings files...${NC}"
 local-settings
 
 # Copy default local settings if files don't exist.
-echo -e "${green_bg} Step 5 ${NC}${green} Syncing vendor and contrib folders to host...${NC}"
-fin refresh -f vendor -s container -r
-fin refresh -f modules -s container -r
+# echo -e "${green_bg} Step 5 ${NC}${green} Syncing vendor and contrib folders to host...${NC}"
+# fin refresh -f vendor -s container -r
+# fin refresh -f modules -s container -r
 
 echo -e "${green_bg} Step 6 ${NC}${green} Setting up site...${NC}"
 if [[ "" != "${SECRET_TERMINUS_TOKEN}" ]]; then
